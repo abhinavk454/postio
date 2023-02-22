@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart';
 
@@ -61,24 +61,38 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 25.0,
+          vertical: 17.0,
+          horizontal: 34.0,
         ),
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
-                height: 200.0,
+                height: 100.0,
               ),
-              const Text("Register to PostIO"),
+              const Icon(
+                CupertinoIcons.heart_fill,
+                color: Colors.red,
+                size: 30.0,
+              ),
+              const Text(
+                "Register to PostIO",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
               const SizedBox(
-                height: 20.0,
+                height: 100.0,
               ),
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: "Email Address",
                   hintText: "Please enter your email address",
+                  icon: Icon(
+                    CupertinoIcons.mail,
+                  ),
                 ),
                 validator: (value) {
                   if (value != null) {
@@ -105,6 +119,9 @@ class _RegisterState extends State<Register> {
                 decoration: const InputDecoration(
                   labelText: "Username",
                   hintText: "Please enter username",
+                  icon: Icon(
+                    CupertinoIcons.person,
+                  ),
                 ),
                 onChanged: (value) {
                   username = value;
@@ -118,6 +135,9 @@ class _RegisterState extends State<Register> {
                 decoration: const InputDecoration(
                   labelText: "Password",
                   hintText: "Please enter password",
+                  icon: Icon(
+                    CupertinoIcons.gear,
+                  ),
                 ),
                 onChanged: (value) {
                   password = value;

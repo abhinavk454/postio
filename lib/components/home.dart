@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:postio/components/dashboard.dart';
 import 'package:postio/components/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,8 +61,6 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         isClicked = false;
       });
-      // Handle network errors
-      logger.e("Error: $e");
       if (e.response != null) {
         logger.e("Error response: ${e.response}");
         Fluttertoast.showToast(
@@ -93,9 +92,17 @@ class _HomePageState extends State<HomePage> {
       color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
           children: [
             const SizedBox(
               height: 100.0,
+            ),
+            const Icon(
+              CupertinoIcons.heart_fill,
+              color: Colors.red,
+              size: 30.0,
             ),
             const Text(
               "PostIO",
@@ -113,11 +120,17 @@ class _HomePageState extends State<HomePage> {
                 horizontal: 34.0,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   TextFormField(
                     decoration: const InputDecoration(
                       labelText: "Username",
                       hintText: "Enter your username",
+                      icon: Icon(
+                        CupertinoIcons.person,
+                      ),
                     ),
                     onChanged: (value) => {
                       username = value,
@@ -126,11 +139,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                     },
                   ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
                   TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: "Password",
                       hintText: "Enter your password",
+                      icon: Icon(
+                        CupertinoIcons.gear,
+                      ),
                     ),
                     onChanged: (value) => {
                       password = value,
@@ -140,24 +159,28 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   const SizedBox(
-                    height: 100.0,
+                    height: 120.0,
                   ),
                   InkWell(
                     onTap: () {
-                      _login().then((value) => {
-                            if (token.isNotEmpty)
-                              {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Dashboard(),
-                                  ),
+                      _login().then(
+                        (value) => {
+                          if (token.isNotEmpty)
+                            {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Dashboard(),
                                 ),
-                              }
-                          });
-                      setState(() {
-                        isClicked = true;
-                      });
+                              ),
+                            }
+                        },
+                      );
+                      setState(
+                        () {
+                          isClicked = true;
+                        },
+                      );
                     },
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),
@@ -165,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                       height: 50,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: Colors.cyan,
+                        color: Colors.blue,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: !isClicked
